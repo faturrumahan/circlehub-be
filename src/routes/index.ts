@@ -1,9 +1,9 @@
-import { Router } from "express"
-import userRouter from "@/routes/user.routes"
-import {authMiddleware} from "@/middlewares"
+import { Router } from 'express';
+import userRouter from '@/routes/user.routes';
+import { authMiddleware } from '@/middlewares';
 
-const router = Router()
+const router = Router();
 
-router.use("/user", userRouter)
+router.use('/user', userRouter);
 
-export default router
+export default router;

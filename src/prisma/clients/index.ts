@@ -1,3 +1,3 @@
-import DBClient from "./client"
+import DBClient from './client';
 
-export { DBClient }
+export { DBClient };

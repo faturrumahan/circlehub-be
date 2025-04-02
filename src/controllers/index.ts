@@ -1,3 +1,3 @@
-import CUser from "./user.controller";
+import CUser from './user.controller';
 
-export {CUser}
+export { CUser };

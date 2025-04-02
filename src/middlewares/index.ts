@@ -1,4 +1,4 @@
-import errorHandler from "./error"
-import {authMiddleware, adminMiddleware} from "./auth.middleware"
+import errorHandler from './error';
+import { authMiddleware, adminMiddleware } from './auth.middleware';
 
-export { errorHandler, authMiddleware, adminMiddleware }
+export { errorHandler, authMiddleware, adminMiddleware };

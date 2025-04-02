@@ -1,4 +1,4 @@
-import env from "./env.config"
-import loggerWinston from "./winston.config"
+import env from './env.config';
+import loggerWinston from './winston.config';
 
-export { env, loggerWinston }
+export { env, loggerWinston };
