@@ -1,0 +1,11 @@
+dist
+
+node_modules
+
+src/prisma/generated
+src/prisma/schemas/migrations
+
+*.env
+
+*.log
+
