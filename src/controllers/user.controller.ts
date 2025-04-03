@@ -1,9 +1,7 @@
-import { env } from '@/configs';
 import { SUser } from '@/services';
-import { CustomError, formatResponse, verifyToken } from '@/utils';
+import { compareId, CustomError, formatResponse } from '@/utils';
 import { VEditUserSchema } from '@/validators';
 import { NextFunction, Request, Response } from 'express';
-import { JwtPayload } from 'jsonwebtoken';
 
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -39,9 +37,8 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = VEditUserSchema.validate(req.body);
 
     const bearerHeader = req.headers?.authorization;
-    const token = bearerHeader?.split('Bearer ')?.[1] ?? '';
-    const isTokenValid = verifyToken(token as string, env.APP.JWT_SECRET) as JwtPayload;
-    if (value.id !== isTokenValid.userId) {
+    const validId = compareId(value.id, bearerHeader as string);
+    if (!validId) {
       throw new CustomError(403, 'Not authorized to edit this user');
     }
 
