@@ -44,6 +44,10 @@ const getSpecificUsers = async (id?: string, name?: string, role?: 'ADMIN' | 'US
         role: true,
       },
     });
+
+    if (users.length === 0) {
+      throw new CustomError(400, 'User(s) not found');
+    }
   }
 
   if (!users) {

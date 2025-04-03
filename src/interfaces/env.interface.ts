@@ -6,5 +6,6 @@ export interface IEnv {
     JWT_EXPIRES_IN: string;
     JWT_REFRESH_SECRET: string;
     JWT_REFRESH_EXPIRES_IN: string;
+    APP_ENV: string;
   };
 }

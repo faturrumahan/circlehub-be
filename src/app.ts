@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import logger from 'morgan';
 import { env, loggerWinston } from './configs';
-// import coreRouter from "./routes"
+import router from "./routes"
 import { errorHandler } from './middlewares';
 // import { deleteCache, schedule } from "./schedulers"
 import { formatResponse } from './utils';
@@ -15,6 +15,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   loggerWinston.info(`[WINSTON] Request - ${req.method} - ${req.url}`);
   next();
 });
+
+app.use("/", router)
 
 app.use(errorHandler);
 

@@ -15,18 +15,18 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(uuid())
-  name         String
-  email        String     @unique
-  password     String
-  refreshToken String?    @default("")
-  role         Role       @default(USER)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  posts        Post[]
-  bookmarks    Bookmark[]
-  favorites    Favorite[]
-  carts        Cart[]
+  id          String     @id @default(uuid())
+  name        String
+  email       String     @unique
+  password    String
+  accessToken String?    @default("")
+  role        Role       @default(USER)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  posts       Post[]
+  bookmarks   Bookmark[]
+  favorites   Favorite[]
+  carts       Cart[]
 
   @@index([name])
   @@index([email])

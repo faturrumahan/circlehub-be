@@ -1,6 +1,7 @@
 import { BaseResponse, StatusType } from '../interfaces';
 import CustomError from './customError';
 import { generateToken, verifyToken } from './jwt';
+import exclude from './exclude';
 
 const formatResponse = <T>(
   status: StatusType,
@@ -14,4 +15,4 @@ const formatResponse = <T>(
   };
 };
 
-export { formatResponse, CustomError, generateToken, verifyToken };
+export { formatResponse, CustomError, generateToken, verifyToken, exclude };
