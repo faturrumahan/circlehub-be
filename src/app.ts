@@ -4,7 +4,7 @@ import { env, loggerWinston } from './configs';
 import router from "./routes"
 import { errorHandler } from './middlewares';
 // import { deleteCache, schedule } from "./schedulers"
-import { formatResponse } from './utils';
+// import { formatResponse } from './utils';
 
 const app = express();
 
