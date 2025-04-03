@@ -106,10 +106,32 @@ const editUser = async (data: Omit<IUser, 'accessToken'>) => {
   };
 };
 
+const verifyUserPassword = async (id: string, password: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      password: true,
+    },
+  });
+
+  if (!user) {
+    throw new CustomError(400, 'User not found');
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordCorrect) {
+    throw new CustomError(409, 'Please provide the correct password');
+  }
+
+  return isPasswordCorrect;
+}
+
 const SUser = {
   getAllUsers,
   getSpecificUsers,
   editUser,
+  verifyUserPassword,
 };
 
 export default SUser;

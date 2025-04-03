@@ -7,5 +7,6 @@ const router = Router();
 router.get('/', CUser.getAllUsers);
 router.get('/find', CUser.getSpesificUsers);
 router.patch('/edit', authMiddleware, CUser.editUser);
+router.post('/verify/password', CUser.verifyUserPassword);
 
 export default router;

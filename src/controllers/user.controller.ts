@@ -52,10 +52,22 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const verifyUserPassword = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id, password } = req.body;
+
+    const user = await SUser.verifyUserPassword(id, password);
+    res.json(formatResponse('T', 'Password verification successful', user));
+  } catch (error) {
+    next(error);
+  }
+}
+
 const CUser = {
   getAllUsers,
   getSpesificUsers,
   editUser,
+  verifyUserPassword
 };
 
 export default CUser;
