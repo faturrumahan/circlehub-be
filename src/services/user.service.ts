@@ -1,5 +1,7 @@
+import { IUser } from '@/interfaces';
 import prisma from '@/prisma/clients/client';
 import { CustomError } from '@/utils';
+import bcrypt from 'bcrypt';
 
 const getAllUsers = async () => {
   const users = await prisma.user.findMany({
@@ -59,9 +61,55 @@ const getSpecificUsers = async (id?: string, name?: string, role?: 'ADMIN' | 'US
   };
 };
 
+const editUser = async (data: Omit<IUser, 'accessToken'>) => {
+  const { id, email, password, name, role } = data;
+
+  const newData = { email, name, role, password };
+  Object.keys(newData).forEach((key) => {
+    if (newData[key as keyof typeof newData] === undefined) {
+      delete newData[key as keyof typeof newData];
+    }
+  });
+  
+  if (newData.email) {
+    const isEmailExist = await prisma.user.findFirst({
+      where: {
+        email: newData.email,
+        NOT: {
+          id
+        },
+      },
+    });
+  
+    if (isEmailExist) {
+      throw new CustomError(409, 'Email already exists');
+    }
+  }
+
+  if (newData.password) {
+    newData.password = await bcrypt.hash(password, 10);
+  }
+
+  const user = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: newData,
+  });
+
+  if (!user) {
+    throw new CustomError(400, 'User not found');
+  }
+
+  return {
+    user: user,
+  };
+};
+
 const SUser = {
   getAllUsers,
   getSpecificUsers,
+  editUser,
 };
 
 export default SUser;

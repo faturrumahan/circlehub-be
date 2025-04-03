@@ -59,7 +59,7 @@ const login = async (data: Pick<IUser, 'email' | 'password'>, forceLogin = false
   };
 };
 
-const register = async (data: Omit<IUser, 'id' | 'refreshToken'>) => {
+const register = async (data: Omit<IUser, 'id' | 'accessToken'>) => {
   const { email, name, password, role } = data;
 
   const isEmailExist = await prisma.user.findFirst({
